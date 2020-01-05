@@ -1,5 +1,4 @@
 #!/usr/bin/env node
 
-import userName from '..';
-
-
+import actual from '..';
+actual();
