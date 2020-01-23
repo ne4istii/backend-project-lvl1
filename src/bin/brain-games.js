@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
-import actual from '..';
+import { printGreeting } from '..';
 
-actual();
+console.log('Welcome to the BrainGames!');
+printGreeting();
