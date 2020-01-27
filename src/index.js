@@ -4,6 +4,25 @@ const randomInt = (min, max) => Math.floor(Math.random() * (max - min) + min);
 
 const randomSym = (str) => str[Math.floor(Math.random() * str.length)];
 
+const compareAnswers = (counter, userName, getAnswer, correctAnswer) => {
+  if (correctAnswer === Number(getAnswer)) {
+    console.log('Correct!');
+    counter += 1;
+  } else {
+    console.log(Number(getAnswer), 'is wrong answer ;(. Correct answer was', correctAnswer, 'Lets try again, ', userName, '!');
+    counter = 0;
+  }
+  return counter;
+};
+
+const calcNod = (a, b) => {
+  while (a !== 0 && b !== 0) {
+    if (a > b) a %= b;
+    else b %= a;
+  }
+  return a + b;
+};
+
 export const printGreeting = () => {
   const userName = readlineSync.question('May I have your name? ');
   console.log('Hello, ', userName, '!\n');
@@ -67,18 +86,8 @@ export const calc = () => {
   console.log('Congratulations, ', userName, '!');
 };
 
-const calcNod = (a, b) => {
-  while (a !== 0 && b !== 0) {
-    if (a > b) a %= b;
-    else b %= a;
-  }
-  return a + b;
-};
-
-const compareAnswers = (inputAnswer, correctAnswer) => correctAnswer === Number(inputAnswer);
-
 export const gcd = (minInt, maxInt, correctAnswerСounter) => {
-  let counter = 0;
+  const counter = 0;
   const userName = printGreeting();
   while (counter < correctAnswerСounter) {
     const rInt1 = randomInt(minInt, maxInt);
@@ -86,13 +95,7 @@ export const gcd = (minInt, maxInt, correctAnswerСounter) => {
     console.log('Question: ', rInt1, rInt2);
     const correctAnswer = calcNod(rInt1, rInt2);
     const getAnswer = readlineSync.question('Your answer: ');
-    if (compareAnswers(getAnswer, correctAnswer)) {
-      console.log('Correct!');
-      counter += 1;
-    } else {
-      console.log(Number(getAnswer), 'is wrong answer ;(. Correct answer was', correctAnswer, 'Lets try again, ', userName, '!');
-      counter = 0;
-    }
+    compareAnswers(counter, userName, getAnswer, correctAnswer);
   }
   console.log('Congratulations, ', userName, '!');
 };
