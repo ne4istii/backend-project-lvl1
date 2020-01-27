@@ -2,25 +2,29 @@ import readlineSync from 'readline-sync';
 
 const randomInt = (min, max) => Math.floor(Math.random() * (max - min) + min);
 
-const randomSym = (len, str) => {
-  let ans = '';
-  for (let i = len; i > 0; i -= 1) {
-    ans += str[Math.floor(Math.random() * str.length)];
-  }
-  return ans;
-};
+const randomSym = (str) => str[Math.floor(Math.random() * str.length)];
 
-const yourName = () => readlineSync.question('May I have your name? ');
-
-const printGreeting = () => {
-  const userName = yourName();
+export const printGreeting = () => {
+  const userName = readlineSync.question('May I have your name? ');
   console.log('Hello, ', userName, '!\n');
+  return userName;
 };
 
-const evenParity = () => {
+/*
+const makeExpressionForCalc = (x, y, z) => cons(cons(x, y), z);
+const getX = point => car(car(point));
+const getY = point => cdr(car(point));
+const getZ = point => cdr(point);
+
+const makeQuestionForCalc = (rInt1, rInt2, rOper) => {
+  const a = makeExpressionForCalc(rInt1, rInt2, rOper);
+  console.log('Question: ', getX(a), getY(a), getZ(a));
+};
+*/
+
+export const evenParity = () => {
   let countCorrectAnswer = 0;
-  const userName = yourName();
-  console.log('Hello, ', userName, '!\n');
+  const userName = printGreeting();
   while (countCorrectAnswer < 3) {
     const rInt = randomInt(1, 100);
     console.log('Question: ', rInt);
@@ -36,16 +40,15 @@ const evenParity = () => {
   console.log('Congratulations, ', userName, '!');
 };
 
-const calc = () => {
+export const calc = () => {
   let countCorrectAnswer = 0;
   let correctAnswer = 0;
   const mathOperator = '*-+';
-  const userName = yourName();
-  console.log('Hello, ', userName, '!\n');
+  const userName = printGreeting();
   while (countCorrectAnswer < 3) {
     const rInt1 = randomInt(1, 100);
     const rInt2 = randomInt(1, 100);
-    const rOper = randomSym(1, mathOperator);
+    const rOper = randomSym(mathOperator);
     console.log('Question: ', rInt1, rOper, rInt2);
     if (rOper === '*') {
       correctAnswer = rInt1 * rInt2;
@@ -64,4 +67,32 @@ const calc = () => {
   console.log('Congratulations, ', userName, '!');
 };
 
-export { printGreeting, evenParity, calc };
+const calcNod = (a, b) => {
+  while (a !== 0 && b !== 0) {
+    if (a > b) a %= b;
+    else b %= a;
+  }
+  return a + b;
+};
+
+const compareAnswers = (inputAnswer, correctAnswer) => correctAnswer === Number(inputAnswer);
+
+export const gcd = (minInt, maxInt, correctAnswerСounter) => {
+  let counter = 0;
+  const userName = printGreeting();
+  while (counter < correctAnswerСounter) {
+    const rInt1 = randomInt(minInt, maxInt);
+    const rInt2 = randomInt(minInt, maxInt);
+    console.log('Question: ', rInt1, rInt2);
+    const correctAnswer = calcNod(rInt1, rInt2);
+    const getAnswer = readlineSync.question('Your answer: ');
+    if (compareAnswers(getAnswer, correctAnswer)) {
+      console.log('Correct!');
+      counter += 1;
+    } else {
+      console.log(Number(getAnswer), 'is wrong answer ;(. Correct answer was', correctAnswer, 'Lets try again, ', userName, '!');
+      counter = 0;
+    }
+  }
+  console.log('Congratulations, ', userName, '!');
+};
