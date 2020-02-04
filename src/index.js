@@ -1,9 +1,12 @@
 import readlineSync from 'readline-sync';
 
+// Фукнция-генератор случайного целого числа в заданном диапазоне
 const randomInt = (min, max) => Math.floor(Math.random() * (max - min) + min);
 
+// Функция-генератор случайного символа в переданной последовательности (строке)
 const randomSym = (str) => str[Math.floor(Math.random() * str.length)];
 
+// Функция сравнения правильного ответа и ответа, полученного от пользователя
 const compareAnswers = (counter, userName, getAnswer, correctAnswer) => {
   if (correctAnswer === Number(getAnswer)) {
     console.log('Correct!');
@@ -15,6 +18,7 @@ const compareAnswers = (counter, userName, getAnswer, correctAnswer) => {
   return counter;
 };
 
+// Фунцикция вычисления НОД
 const calcNod = (a, b) => {
   while (a !== 0 && b !== 0) {
     if (a > b) a %= b;
@@ -23,23 +27,28 @@ const calcNod = (a, b) => {
   return a + b;
 };
 
+// Функция-генератор арифметической прогрессии с заменой одного элемента
+const calcProg = (replaceSymbol, minInt, maxInt) => {
+  let result = '';
+  let trueAnswer;
+  let progElement = randomInt(minInt, maxInt);
+  const progStep = randomInt(minInt, maxInt);
+  const replacePosition = randomInt(minInt, maxInt);
+  for (let i = 1; i <= 10; i += 1) {
+    if (replacePosition === i) {
+      result += `${replaceSymbol}\xa0`;
+      trueAnswer = progElement;
+    } else result += `${progElement}\xa0`;
+    progElement += progStep;
+  }
+  return { result, trueAnswer };
+};
+
 export const printGreeting = () => {
   const userName = readlineSync.question('May I have your name? ');
   console.log('Hello, ', userName, '!\n');
   return userName;
 };
-
-/*
-const makeExpressionForCalc = (x, y, z) => cons(cons(x, y), z);
-const getX = point => car(car(point));
-const getY = point => cdr(car(point));
-const getZ = point => cdr(point);
-
-const makeQuestionForCalc = (rInt1, rInt2, rOper) => {
-  const a = makeExpressionForCalc(rInt1, rInt2, rOper);
-  console.log('Question: ', getX(a), getY(a), getZ(a));
-};
-*/
 
 export const evenParity = () => {
   let countCorrectAnswer = 0;
@@ -87,7 +96,7 @@ export const calc = () => {
 };
 
 export const gcd = (minInt, maxInt, correctAnswerСounter) => {
-  const counter = 0;
+  let counter = 0;
   const userName = printGreeting();
   while (counter < correctAnswerСounter) {
     const rInt1 = randomInt(minInt, maxInt);
@@ -95,7 +104,20 @@ export const gcd = (minInt, maxInt, correctAnswerСounter) => {
     console.log('Question: ', rInt1, rInt2);
     const correctAnswer = calcNod(rInt1, rInt2);
     const getAnswer = readlineSync.question('Your answer: ');
-    compareAnswers(counter, userName, getAnswer, correctAnswer);
+    counter = compareAnswers(counter, userName, getAnswer, correctAnswer);
+  }
+  console.log('Congratulations, ', userName, '!');
+};
+
+export const progression = (replaceSymbol, minInt, maxInt, correctAnswerСounter) => {
+  const userName = printGreeting();
+  let counter = 0;
+  while (counter < correctAnswerСounter) {
+    const rProg = calcProg(replaceSymbol, minInt, maxInt);
+    console.log('Question: ', rProg.result);
+    const correctAnswer = rProg.trueAnswer;
+    const getAnswer = readlineSync.question('Your answer: ');
+    counter = compareAnswers(counter, userName, getAnswer, correctAnswer);
   }
   console.log('Congratulations, ', userName, '!');
 };
