@@ -18,6 +18,19 @@ const compareAnswers = (counter, userName, getAnswer, correctAnswer) => {
   return counter;
 };
 
+// Функция сравнения правильного ответа и ответа, полученного от пользователя
+const compareWordAnswers = (counter, userName, getAnswer, correctAnswer) => {
+  if (correctAnswer === (getAnswer === 'yes')) {
+    console.log('Correct!');
+    counter += 1;
+  } else {
+    console.log(getAnswer, 'is wrong answer ;(. Correct answer was "no". Lets try again, ', userName, '!');
+    counter = 0;
+  }
+  return counter;
+};
+
+
 // Фунцикция вычисления НОД
 const calcNod = (a, b) => {
   while (a !== 0 && b !== 0) {
@@ -42,6 +55,13 @@ const calcProg = (replaceSymbol, minInt, maxInt) => {
     progElement += progStep;
   }
   return { result, trueAnswer };
+};
+
+// Функция проверки числа на простоту
+const IsPrime = (num) => {
+  let d = 2;
+  while (num % d !== 0) d += 1;
+  return d === num;
 };
 
 export const printGreeting = () => {
@@ -118,6 +138,20 @@ export const progression = (replaceSymbol, minInt, maxInt, correctAnswerСounter
     const correctAnswer = rProg.trueAnswer;
     const getAnswer = readlineSync.question('Your answer: ');
     counter = compareAnswers(counter, userName, getAnswer, correctAnswer);
+  }
+  console.log('Congratulations, ', userName, '!');
+};
+
+export const prime = (minInt, maxInt, correctAnswerСounter) => {
+  const userName = printGreeting();
+  let counter = 0;
+  console.log('Answer "yes" if given number is prime. Otherwise answer "no".\n');
+  while (counter < correctAnswerСounter) {
+    const rInt = randomInt(minInt, maxInt);
+    console.log('Question: ', rInt);
+    const correctAnswer = IsPrime(rInt);
+    const getAnswer = readlineSync.question('Your answer: ');
+    counter = compareWordAnswers(counter, userName, getAnswer, correctAnswer);
   }
   console.log('Congratulations, ', userName, '!');
 };
