@@ -44,13 +44,13 @@ const calcFunc = (rOper, rInt1, rInt2) => {
 };
 
 // Функция-генератор арифметической прогрессии с заменой одного элемента
-const calcProg = (replaceSymbol, minInt, maxInt) => {
+const calcProg = (replaceSymbol, minInt, maxInt, progLen) => {
   let result = '';
   let trueAnswer;
   let progElement = randomInt(minInt, maxInt);
   const progStep = randomInt(minInt, maxInt);
   const replacePosition = randomInt(minInt, maxInt);
-  for (let i = 1; i <= 10; i += 1) {
+  for (let i = 1; i <= progLen; i += 1) {
     if (replacePosition === i) {
       result += `${replaceSymbol}\xa0`;
       trueAnswer = progElement;
@@ -75,6 +75,7 @@ const IsPrime = (num) => {
 };
 
 export const printGreeting = () => {
+  console.log('Welcome to the BrainGames!\n');
   const userName = readlineSync.question('May I have your name? ');
   console.log('Hello, ', userName, '!\n');
   return userName;
@@ -83,6 +84,7 @@ export const printGreeting = () => {
 export const evenParity = (minInt, maxInt, correctAnswerСounter) => {
   let counter = 0;
   const userName = printGreeting();
+  console.log('Answer "yes" if the number is even, otherwise answer "no".');
   while (counter < correctAnswerСounter) {
     const rInt = randomInt(minInt, maxInt);
     console.log('Question: ', rInt);
@@ -96,6 +98,7 @@ export const evenParity = (minInt, maxInt, correctAnswerСounter) => {
 export const calc = (mathOperator, minInt, maxInt, correctAnswerСounter) => {
   let counter = 0;
   const userName = printGreeting();
+  console.log('What is the result of the expression?');
   while (counter < correctAnswerСounter) {
     const rInt1 = randomInt(minInt, maxInt);
     const rInt2 = randomInt(minInt, maxInt);
@@ -111,6 +114,7 @@ export const calc = (mathOperator, minInt, maxInt, correctAnswerСounter) => {
 export const gcd = (minInt, maxInt, correctAnswerСounter) => {
   let counter = 0;
   const userName = printGreeting();
+  console.log('Find the greatest common divisor of given numbers');
   while (counter < correctAnswerСounter) {
     const rInt1 = randomInt(minInt, maxInt);
     const rInt2 = randomInt(minInt, maxInt);
@@ -122,11 +126,12 @@ export const gcd = (minInt, maxInt, correctAnswerСounter) => {
   console.log('Congratulations, ', userName, '!');
 };
 
-export const progression = (replaceSymbol, minInt, maxInt, correctAnswerСounter) => {
+export const progression = (replaceSymbol, minInt, maxInt, correctAnswerСounter, progLen) => {
   let counter = 0;
   const userName = printGreeting();
+  console.log('What number is missing in the progression?');
   while (counter < correctAnswerСounter) {
-    const rProg = calcProg(replaceSymbol, minInt, maxInt);
+    const rProg = calcProg(replaceSymbol, minInt, maxInt, progLen);
     console.log('Question: ', rProg.result);
     const correctAnswer = rProg.trueAnswer;
     const getAnswer = readlineSync.question('Your answer: ');
