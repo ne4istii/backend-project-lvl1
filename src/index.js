@@ -7,26 +7,16 @@ const randomInt = (min, max) => Math.floor(Math.random() * (max - min) + min);
 const randomSym = (str) => str[Math.floor(Math.random() * str.length)];
 
 // Функция сравнения правильного ответа и ответа, полученного от пользователя
-const compareNumericAnswers = (counter, userName, getAnswer, correctAnswer) => {
+const compareAnswers = (counter, userName, getAnswer, correctAnswer) => {
   let rCounter;
-  if (Number(correctAnswer) === Number(getAnswer)) {
+  let getAnswerNum;
+  if ((typeof (getAnswer) === 'string') && (typeof (correctAnswer) === 'number')) getAnswerNum = Number(getAnswer);
+  else getAnswerNum = getAnswer;
+  if (correctAnswer === getAnswerNum) {
     console.log('Correct!');
     rCounter = counter + 1;
   } else {
-    console.log(Number(getAnswer), 'is wrong answer ;(. Correct answer was', Number(correctAnswer), 'Lets try again, ', userName, '!');
-    rCounter = 0;
-  }
-  return rCounter;
-};
-
-// Функция сравнения правильного ответа и ответа, полученного от пользователя
-const compareWordAnswers = (counter, userName, getAnswer, correctAnswer) => {
-  let rCounter;
-  if (correctAnswer === getAnswer) {
-    console.log('Correct!');
-    rCounter = counter + 1;
-  } else {
-    console.log(`"${getAnswer}" is wrong answer ;(. Correct answer was "${correctAnswer}". Lets try again, ${userName}!`);
+    console.log(`"${getAnswerNum}" is wrong answer ;(. Correct answer was "${correctAnswer}". Lets try again, ${userName}!`);
     rCounter = 0;
   }
   return rCounter;
@@ -98,7 +88,7 @@ export const evenParity = (minInt, maxInt, correctAnswerСounter) => {
     console.log('Question: ', rInt);
     const correctAnswer = parityCheck(rInt);
     const getAnswer = readlineSync.question('Your answer: ');
-    counter = compareWordAnswers(counter, userName, getAnswer, correctAnswer);
+    counter = compareAnswers(counter, userName, getAnswer, correctAnswer);
   }
   console.log('Congratulations, ', userName, '!');
 };
@@ -113,7 +103,7 @@ export const calc = (mathOperator, minInt, maxInt, correctAnswerСounter) => {
     console.log('Question: ', rInt1, rOper, rInt2);
     const correctAnswer = calcFunc(rOper, rInt1, rInt2);
     const getAnswer = readlineSync.question('Your answer: ');
-    counter = compareNumericAnswers(counter, userName, getAnswer, correctAnswer);
+    counter = compareAnswers(counter, userName, getAnswer, correctAnswer);
   }
   console.log('Congratulations, ', userName, '!');
 };
@@ -127,34 +117,34 @@ export const gcd = (minInt, maxInt, correctAnswerСounter) => {
     console.log('Question: ', rInt1, rInt2);
     const correctAnswer = calcNod(rInt1, rInt2);
     const getAnswer = readlineSync.question('Your answer: ');
-    counter = compareNumericAnswers(counter, userName, getAnswer, correctAnswer);
+    counter = compareAnswers(counter, userName, getAnswer, correctAnswer);
   }
   console.log('Congratulations, ', userName, '!');
 };
 
 export const progression = (replaceSymbol, minInt, maxInt, correctAnswerСounter) => {
-  const userName = printGreeting();
   let counter = 0;
+  const userName = printGreeting();
   while (counter < correctAnswerСounter) {
     const rProg = calcProg(replaceSymbol, minInt, maxInt);
     console.log('Question: ', rProg.result);
     const correctAnswer = rProg.trueAnswer;
     const getAnswer = readlineSync.question('Your answer: ');
-    counter = compareNumericAnswers(counter, userName, getAnswer, correctAnswer);
+    counter = compareAnswers(counter, userName, getAnswer, correctAnswer);
   }
   console.log('Congratulations, ', userName, '!');
 };
 
 export const prime = (minInt, maxInt, correctAnswerСounter) => {
-  const userName = printGreeting();
   let counter = 0;
+  const userName = printGreeting();
   console.log('Answer "yes" if given number is prime. Otherwise answer "no".\n');
   while (counter < correctAnswerСounter) {
     const rInt = randomInt(minInt, maxInt);
     console.log('Question: ', rInt);
     const correctAnswer = IsPrime(rInt);
     const getAnswer = readlineSync.question('Your answer: ');
-    counter = compareWordAnswers(counter, userName, getAnswer, correctAnswer);
+    counter = compareAnswers(counter, userName, getAnswer, correctAnswer);
   }
   console.log('Congratulations, ', userName, '!');
 };
