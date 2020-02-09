@@ -7,13 +7,13 @@ const randomInt = (min, max) => Math.floor(Math.random() * (max - min) + min);
 const randomSym = (str) => str[Math.floor(Math.random() * str.length)];
 
 // Функция сравнения правильного ответа и ответа, полученного от пользователя
-const compareAnswers = (counter, userName, getAnswer, correctAnswer) => {
+const compareNumericAnswers = (counter, userName, getAnswer, correctAnswer) => {
   let rCounter;
-  if (correctAnswer === Number(getAnswer)) {
+  if (Number(correctAnswer) === Number(getAnswer)) {
     console.log('Correct!');
     rCounter = counter + 1;
   } else {
-    console.log(Number(getAnswer), 'is wrong answer ;(. Correct answer was', correctAnswer, 'Lets try again, ', userName, '!');
+    console.log(Number(getAnswer), 'is wrong answer ;(. Correct answer was', Number(correctAnswer), 'Lets try again, ', userName, '!');
     rCounter = 0;
   }
   return rCounter;
@@ -22,11 +22,11 @@ const compareAnswers = (counter, userName, getAnswer, correctAnswer) => {
 // Функция сравнения правильного ответа и ответа, полученного от пользователя
 const compareWordAnswers = (counter, userName, getAnswer, correctAnswer) => {
   let rCounter;
-  if (correctAnswer === (getAnswer === 'yes')) {
+  if (correctAnswer === getAnswer) {
     console.log('Correct!');
     rCounter = counter + 1;
   } else {
-    console.log(getAnswer, 'is wrong answer ;(. Correct answer was "no". Lets try again, ', userName, '!');
+    console.log(`"${getAnswer}" is wrong answer ;(. Correct answer was "${correctAnswer}". Lets try again, ${userName}!`);
     rCounter = 0;
   }
   return rCounter;
@@ -70,11 +70,18 @@ const calcProg = (replaceSymbol, minInt, maxInt) => {
   return { result, trueAnswer };
 };
 
+// Функция проверки числа на четность
+const parityCheck = (rInt) => {
+  if ((rInt % 2) === 0) return 'yes';
+  return 'no';
+};
+
 // Функция проверки числа на простоту
 const IsPrime = (num) => {
   let d = 2;
   while (num % d !== 0) d += 1;
-  return d === num;
+  if (d === num) return 'yes';
+  return 'no';
 };
 
 export const printGreeting = () => {
@@ -83,20 +90,15 @@ export const printGreeting = () => {
   return userName;
 };
 
-export const evenParity = () => {
-  let countCorrectAnswer = 0;
+export const evenParity = (minInt, maxInt, correctAnswerСounter) => {
+  let counter = 0;
   const userName = printGreeting();
-  while (countCorrectAnswer < 3) {
-    const rInt = randomInt(1, 100);
+  while (counter < correctAnswerСounter) {
+    const rInt = randomInt(minInt, maxInt);
     console.log('Question: ', rInt);
+    const correctAnswer = parityCheck(rInt);
     const getAnswer = readlineSync.question('Your answer: ');
-    if ((rInt % 2 === 0 && getAnswer === 'yes') || (rInt % 2 !== 0 && getAnswer === 'no')) {
-      console.log('Correct!');
-      countCorrectAnswer += 1;
-    } else {
-      console.log('"yes" is wrong answer ;(. Correct answer was "no". Lets try again, ', userName, '!');
-      countCorrectAnswer = 0;
-    }
+    counter = compareWordAnswers(counter, userName, getAnswer, correctAnswer);
   }
   console.log('Congratulations, ', userName, '!');
 };
@@ -111,7 +113,7 @@ export const calc = (mathOperator, minInt, maxInt, correctAnswerСounter) => {
     console.log('Question: ', rInt1, rOper, rInt2);
     const correctAnswer = calcFunc(rOper, rInt1, rInt2);
     const getAnswer = readlineSync.question('Your answer: ');
-    counter = compareAnswers(counter, userName, getAnswer, correctAnswer);
+    counter = compareNumericAnswers(counter, userName, getAnswer, correctAnswer);
   }
   console.log('Congratulations, ', userName, '!');
 };
@@ -125,7 +127,7 @@ export const gcd = (minInt, maxInt, correctAnswerСounter) => {
     console.log('Question: ', rInt1, rInt2);
     const correctAnswer = calcNod(rInt1, rInt2);
     const getAnswer = readlineSync.question('Your answer: ');
-    counter = compareAnswers(counter, userName, getAnswer, correctAnswer);
+    counter = compareNumericAnswers(counter, userName, getAnswer, correctAnswer);
   }
   console.log('Congratulations, ', userName, '!');
 };
@@ -138,7 +140,7 @@ export const progression = (replaceSymbol, minInt, maxInt, correctAnswerСounter
     console.log('Question: ', rProg.result);
     const correctAnswer = rProg.trueAnswer;
     const getAnswer = readlineSync.question('Your answer: ');
-    counter = compareAnswers(counter, userName, getAnswer, correctAnswer);
+    counter = compareNumericAnswers(counter, userName, getAnswer, correctAnswer);
   }
   console.log('Congratulations, ', userName, '!');
 };
