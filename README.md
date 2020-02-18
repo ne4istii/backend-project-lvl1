@@ -8,6 +8,7 @@
 [![asciicast](https://asciinema.org/a/oOnoNelnXUQ8WAdjFVOcnWguW.svg)](https://asciinema.org/a/oOnoNelnXUQ8WAdjFVOcnWguW)
 
 # start and play: brain-even.js
+[![asciicast](https://asciinema.org/a/EgiIRNGlPsyXgJxgGXeeBkbN4.svg)](https://asciinema.org/a/EgiIRNGlPsyXgJxgGXeeBkbN4)
 
 # start and play: brain-calc.js
 
