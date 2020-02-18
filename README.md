@@ -11,8 +11,10 @@
 [![asciicast](https://asciinema.org/a/EgiIRNGlPsyXgJxgGXeeBkbN4.svg)](https://asciinema.org/a/EgiIRNGlPsyXgJxgGXeeBkbN4)
 
 # start and play: brain-calc.js
+[![asciicast](https://asciinema.org/a/V2FwJqpKhJ4MZKWYM2UbdmYzi.svg)](https://asciinema.org/a/V2FwJqpKhJ4MZKWYM2UbdmYzi)
 
 # start and play: brain-gcd.js
+[![asciicast](https://asciinema.org/a/ZTfEQTJiJCCJoMh2hQIqvgxGM.svg)](https://asciinema.org/a/ZTfEQTJiJCCJoMh2hQIqvgxGM)
 
 # start and play: brain-progression.js
 
