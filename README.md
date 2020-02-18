@@ -17,5 +17,6 @@
 [![asciicast](https://asciinema.org/a/ZTfEQTJiJCCJoMh2hQIqvgxGM.svg)](https://asciinema.org/a/ZTfEQTJiJCCJoMh2hQIqvgxGM)
 
 # start and play: brain-progression.js
+[![asciicast](https://asciinema.org/a/nEATMAKVTXmdqmSM4OjFTtZFV.svg)](https://asciinema.org/a/nEATMAKVTXmdqmSM4OjFTtZFV)
 
 # start and play: brain-prime.js
