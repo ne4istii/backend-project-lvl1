@@ -20,3 +20,4 @@
 [![asciicast](https://asciinema.org/a/nEATMAKVTXmdqmSM4OjFTtZFV.svg)](https://asciinema.org/a/nEATMAKVTXmdqmSM4OjFTtZFV)
 
 # start and play: brain-prime.js
+[![asciicast](https://asciinema.org/a/PkWCESKKdje9n5UyujrKadJIN.svg)](https://asciinema.org/a/PkWCESKKdje9n5UyujrKadJIN)
