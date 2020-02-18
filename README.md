@@ -6,3 +6,13 @@
 
 # start and play: brain-games.js
 [![asciicast](https://asciinema.org/a/oOnoNelnXUQ8WAdjFVOcnWguW.svg)](https://asciinema.org/a/oOnoNelnXUQ8WAdjFVOcnWguW)
+
+# start and play: brain-even.js
+
+# start and play: brain-calc.js
+
+# start and play: brain-gcd.js
+
+# start and play: brain-progression.js
+
+# start and play: brain-prime.js
