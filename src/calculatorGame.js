@@ -1,7 +1,7 @@
 import {
   setCorrectAnswerСounter as correctAnswerCounter,
   randomInt, randomSymbol, printGreeting, playRound, printCongrats,
-} from './index.js'
+} from './index.js';
 
 // Настройки параметров игры
 const minInt = 1;
