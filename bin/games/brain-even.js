@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
-import { evenParity } from '../../src/index.js';
+// Первая игра "проверка на четность" - brain-even.js
 
-evenParity(1, 100, 3);
+import evenParity from '../../src/evenParityGame.js';
+
+evenParity();

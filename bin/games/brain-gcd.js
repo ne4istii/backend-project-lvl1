@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
-import { gcd } from '../../src/index.js';
+// Третья игра "наибольший общий делитель (НОД)" - brain-gcd.js
 
-gcd(1, 100, 3);
+import gcd from '../../src/gcdGame.js';
+
+gcd();

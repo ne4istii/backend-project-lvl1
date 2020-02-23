@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
-import { prime } from '../../src/index.js';
+// Пятая игра "Простое ли число?" - brain-prime.js
 
-prime(1, 100, 3);
+import prime from '../../src/primeGame.js';
+
+prime();

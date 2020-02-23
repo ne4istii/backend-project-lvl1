@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
-import { progression } from '../../src/index.js';
+// Четвертая игра "Арифметическая прогрессия" - brain-progression.js
 
-progression('..', 1, 10, 3, 10);
+import progression from '../../src/progressionGame.js';
+
+progression();

@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
-import { calculator } from '../../src/index.js';
+// Вторая игра "калькулятор" - brain-calc.js
 
-const mathOperator = '*-+';
-calculator(mathOperator, 1, 100, 3);
+import calculator from '../../src/calculatorGame.js';
+
+calculator();
