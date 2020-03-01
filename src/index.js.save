@@ -1,0 +1,6 @@
+var userName = readlineSync.question('May I have your name? ');
+console.log('Hi ' + userName + '!');import readlineSync from 'readline-sync';
+const actual = () =>
+	const name = readlineSync.question('Your answer: ');
+	console.log('Hello ' + name + '!');
+};

@@ -2,6 +2,6 @@
 
 // Вторая игра "калькулятор" - brain-calc.js
 
-import calculator from '../../src/calculatorGame.js';
+import calculator from '../src/games/calculatorGame.js';
 
 calculator();

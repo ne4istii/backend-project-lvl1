@@ -1,0 +1,53 @@
+{
+  "name": "backend-project-lvl1-by-Ne4istii",
+  "version": "1.0.0",
+  "description": "backend-project-lvl1",
+  "main": "index.js",
+  "scripts": {
+    "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
+    "prepublishOnly": "npm run build"
+  },
+  "bin": {
+    "brain-games": "dist/bin/brain-games.js",
+    "brain-even": "dist/bin/brain-even.js",
+    "brain-calc": "dist/bin/brain-calc.js",
+    "brain-gcd": "dist/bin/brain-gcd.js",
+    "brain-progression": "dist/bin/brain-progression.js",
+    "brain-prime": "if n % 2 == 0:
+        return n == 2
+   d = 3
+   while d * d <= n and n % d != 0:
+       d += 2
+   return d * d > n"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ne4istii/backend-project-lvl1.git"
+  },
+  "author": "Ne4istii",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ne4istii/backend-project-lvl1/issues"
+  },
+  "homepage": "https://github.com/ne4istii/backend-project-lvl1#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
+    "@babel/node": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-babel": "^5.3.0",
+    "eslint-plugin-import": "^2.20.0",
+    "jest": "^24.9.0",
+    "jest-cli": "^24.9.0"
+  },
+  "dependencies": {
+    "@hexlet/pairs": "^1.0.10",
+    "readline-sync": "^1.4.10"
+  }
+}
