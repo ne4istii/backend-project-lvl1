@@ -2,3 +2,4 @@
 dist
 babel.config.js
 .travis.yml
+*save*
