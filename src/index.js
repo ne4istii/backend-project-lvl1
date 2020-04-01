@@ -27,13 +27,11 @@ const printGameInfo = (text) => console.log(text);
 
 // Функция преобразования ответа пользователя к нужному типу данных
 const compareStringAndNumberAnswers = (userName, userAnswer, correctAnswer) => {
-  // eslint-disable-next-line no-unused-expressions
-  const answer = ((typeof (userAnswer) === 'string') && (typeof (correctAnswer) === 'number')) ? Number(userAnswer) : userAnswer;
-  if (correctAnswer === answer) {
+  if (Number(userAnswer) === correctAnswer) {
     console.log('Correct!');
     return true;
   }
-  console.log(`"${userAnswer}" is wrong answer ;(. Correct answer was "${answer}". Lets try again, ${userName}!`);
+  console.log(`"${userAnswer}" is wrong answer ;(. Correct answer was "${correctAnswer}". Lets try again, ${userName}!`);
   return false;
 };
 
