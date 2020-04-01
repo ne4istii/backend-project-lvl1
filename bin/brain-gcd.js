@@ -2,6 +2,6 @@
 
 // Третья игра "наибольший общий делитель (НОД)" - brain-gcd.js
 
-import gcd from '../src/games/gcdGame.js';
+import gcd from '../src/games/gcdGameSettings.js';
 
 gcd();
