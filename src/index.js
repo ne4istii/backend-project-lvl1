@@ -33,22 +33,19 @@ const transformTypeUserAnswer = (userAnswer, correctAnswer) => {
 
 // Функция сравнения правильного ответа и ответа, полученного от пользователя
 const compareAnswers = (userName, userAnswer, correctAnswer) => {
+  let answer;
   if (userAnswer === 'yes' && correctAnswer === false) {
-    const answer = 'no';
-    console.log(`"${userAnswer}" is wrong answer ;(. Correct answer was "${answer}". Lets try again, ${userName}!`);
-    return false;
+    answer = 'no';
   }
   if (userAnswer === 'no' && correctAnswer === false) {
-    const answer = 'yes';
-    console.log(`"${userAnswer}" is wrong answer ;(. Correct answer was "${answer}". Lets try again, ${userName}!`);
-    return false;
+    answer = 'yes';
   }
   if (((userAnswer === 'yes') && (correctAnswer === true)) || ((userAnswer === 'no') && (correctAnswer === false))
   || ((typeof (correctAnswer) !== 'boolean') && correctAnswer === transformTypeUserAnswer(userAnswer, correctAnswer))) {
     console.log('Correct!');
     return true;
   }
-  console.log(`"${userAnswer}" is wrong answer ;(. Correct answer was "${correctAnswer}". Lets try again, ${userName}!`);
+  console.log(`"${userAnswer}" is wrong answer ;(. Correct answer was "${answer}". Lets try again, ${userName}!`);
   return false;
 };
 
