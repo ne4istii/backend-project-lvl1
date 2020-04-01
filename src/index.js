@@ -26,27 +26,37 @@ const printCongrats = (userName) => console.log('Congratulations, ', userName, '
 const printGameInfo = (text) => console.log(text);
 
 // Функция преобразования ответа пользователя к нужному типу данных
-const transformTypeUserAnswer = (userAnswer, correctAnswer) => {
-  if ((typeof (userAnswer) === 'string') && (typeof (correctAnswer) === 'number')) return Number(userAnswer);
-  return userAnswer;
+const compareStringAndNumberAnswers = (userName, userAnswer, correctAnswer) => {
+  // eslint-disable-next-line no-unused-expressions
+  const answer = ((typeof (userAnswer) === 'string') && (typeof (correctAnswer) === 'number')) ? Number(userAnswer) : userAnswer;
+  if (correctAnswer === answer) {
+    console.log('Correct!');
+    return true;
+  }
+  console.log(`"${userAnswer}" is wrong answer ;(. Correct answer was "${answer}". Lets try again, ${userName}!`);
+  return false;
 };
 
-// Функция сравнения правильного ответа и ответа, полученного от пользователя
-const compareAnswers = (userName, userAnswer, correctAnswer) => {
-  let answer;
+const compareBolleanAnswers = (userName, userAnswer, correctAnswer) => {
+  let answer = '';
   if (((userAnswer === 'yes') && (correctAnswer === true)) || ((userAnswer === 'no') && (correctAnswer === false))) {
     console.log('Correct!');
     return true;
   }
-  if ((typeof (correctAnswer) !== 'boolean') && correctAnswer === transformTypeUserAnswer(userAnswer, correctAnswer)) {
-    console.log('Correct!');
-    return true;
-  }
-  if (correctAnswer === false) {
+  if (userAnswer === 'yes' && correctAnswer === false) {
     answer = 'no';
   } else answer = 'yes';
+
   console.log(`"${userAnswer}" is wrong answer ;(. Correct answer was "${answer}". Lets try again, ${userName}!`);
   return false;
+};
+
+// Функция сравнения правильного ответа и ответа, полученного от пользователя
+const compareAnswers = (userName, userAnswer, correctAnswer) => {
+  if (typeof (correctAnswer) === 'boolean') {
+    return compareBolleanAnswers(userName, userAnswer, correctAnswer);
+  }
+  return compareStringAndNumberAnswers(userName, userAnswer, correctAnswer);
 };
 
 // Подготовка данных для движка
