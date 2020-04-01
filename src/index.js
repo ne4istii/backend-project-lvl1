@@ -33,35 +33,18 @@ const transformTypeUserAnswer = (userAnswer, correctAnswer) => {
 
 // Функция сравнения правильного ответа и ответа, полученного от пользователя
 const compareAnswers = (userName, userAnswer, correctAnswer) => {
-  if ((userAnswer !== 'yes') && (userAnswer !== 'no') && (correctAnswer === false)) {
+  if (userAnswer === 'yes' && correctAnswer === false) {
     const answer = 'no';
     console.log(`"${userAnswer}" is wrong answer ;(. Correct answer was "${answer}". Lets try again, ${userName}!`);
     return false;
   }
-  if ((userAnswer !== 'yes') && (userAnswer !== 'no') && (correctAnswer === true)) {
+  if (userAnswer === 'no' && correctAnswer === false) {
     const answer = 'yes';
     console.log(`"${userAnswer}" is wrong answer ;(. Correct answer was "${answer}". Lets try again, ${userName}!`);
     return false;
   }
-  if ((userAnswer === 'yes') && (correctAnswer === true)) {
-    console.log('Correct!');
-    return true;
-  }
-  if ((userAnswer === 'no') && (correctAnswer === false)) {
-    console.log('Correct!');
-    return true;
-  }
-  if ((userAnswer === 'yes') && (correctAnswer === false)) {
-    const answer = 'no';
-    console.log(`"${userAnswer}" is wrong answer ;(. Correct answer was "${answer}". Lets try again, ${userName}!`);
-    return false;
-  }
-  if ((userAnswer === 'no') && (correctAnswer === true)) {
-    const answer = 'yes';
-    console.log(`"${userAnswer}" is wrong answer ;(. Correct answer was "${answer}". Lets try again, ${userName}!`);
-    return false;
-  }
-  if ((typeof (correctAnswer) !== 'boolean') && correctAnswer === transformTypeUserAnswer(userAnswer, correctAnswer)) {
+  if (((userAnswer === 'yes') && (correctAnswer === true)) || ((userAnswer === 'no') && (correctAnswer === false))
+  || ((typeof (correctAnswer) !== 'boolean') && correctAnswer === transformTypeUserAnswer(userAnswer, correctAnswer))) {
     console.log('Correct!');
     return true;
   }
