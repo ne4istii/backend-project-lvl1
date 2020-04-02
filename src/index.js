@@ -26,41 +26,27 @@ const printCongrats = (userName) => console.log('Congratulations, ', userName, '
 const printGameInfo = (text) => console.log(text);
 
 // Вывод на экран результирующих результатов
-const printCorrectAnswer = (userAnswer, correctAnswer) => {
+const getCorrectAnswerForPrint = (userAnswer, correctAnswer) => {
   let printableCorrectAnswer = '';
   if ((userAnswer === 'yes') || (correctAnswer === false)) {
     printableCorrectAnswer = 'no';
-  }
-  if ((userAnswer === 'no') || (correctAnswer === true)) {
+  } else if ((userAnswer === 'no') || (correctAnswer === true)) {
     printableCorrectAnswer = 'yes';
-  }
-  if (correctAnswer === 'number') {
+  } else if (correctAnswer === 'number') {
     printableCorrectAnswer = String(correctAnswer);
   } else printableCorrectAnswer = correctAnswer;
   return printableCorrectAnswer;
 };
 
-// Функция преобразования ответа пользователя к нужному типу данных
-const compareStringAndNumberAnswers = (userAnswer, correctAnswer) => {
+// Функция сравнения правильного ответа и ответа, полученного от пользователя
+const compareAnswers = (userAnswer, correctAnswer) => {
+  if (((userAnswer === 'yes') && (correctAnswer === true)) || ((userAnswer === 'no') && (correctAnswer === false))) {
+    return true;
+  }
   if (Number(userAnswer) === correctAnswer) {
     return true;
   }
   return false;
-};
-
-const compareBolleanAnswers = (userAnswer, correctAnswer) => {
-  if (((userAnswer === 'yes') && (correctAnswer === true)) || ((userAnswer === 'no') && (correctAnswer === false))) {
-    return true;
-  }
-  return false;
-};
-
-// Функция сравнения правильного ответа и ответа, полученного от пользователя
-const compareAnswers = (userAnswer, correctAnswer) => {
-  if (typeof (correctAnswer) === 'boolean') {
-    return compareBolleanAnswers(userAnswer, correctAnswer);
-  }
-  return compareStringAndNumberAnswers(userAnswer, correctAnswer);
 };
 
 // Подготовка данных для движка
@@ -96,7 +82,7 @@ export const launchGameEngine = (gameRules, generateDataset, getCorrectAnswer) =
       console.log('Correct!');
       counter += 1;
     } else {
-      const printableCorrectAnswer = printCorrectAnswer(userAnswer, correctAnswer);
+      const printableCorrectAnswer = getCorrectAnswerForPrint(userAnswer, correctAnswer);
       console.log(`"${userAnswer}" is wrong answer ;(. Correct answer was "${printableCorrectAnswer}". Lets try again, ${userName}!`);
       counter = 0;
     }
