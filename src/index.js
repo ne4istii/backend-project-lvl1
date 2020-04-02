@@ -25,36 +25,42 @@ const printCongrats = (userName) => console.log('Congratulations, ', userName, '
 // Вывод на экран текста (правила игры)
 const printGameInfo = (text) => console.log(text);
 
+// Вывод на экран результирующих результатов
+const printCorrectAnswer = (userAnswer, correctAnswer) => {
+  let printableCorrectAnswer = '';
+  if ((userAnswer === 'yes') || (correctAnswer === false)) {
+    printableCorrectAnswer = 'no';
+  }
+  if ((userAnswer === 'no') || (correctAnswer === true)) {
+    printableCorrectAnswer = 'yes';
+  }
+  if (correctAnswer === 'number') {
+    printableCorrectAnswer = String(correctAnswer);
+  } else printableCorrectAnswer = correctAnswer;
+  return printableCorrectAnswer;
+};
+
 // Функция преобразования ответа пользователя к нужному типу данных
-const compareStringAndNumberAnswers = (userName, userAnswer, correctAnswer) => {
+const compareStringAndNumberAnswers = (userAnswer, correctAnswer) => {
   if (Number(userAnswer) === correctAnswer) {
-    console.log('Correct!');
     return true;
   }
-  console.log(`"${userAnswer}" is wrong answer ;(. Correct answer was "${correctAnswer}". Lets try again, ${userName}!`);
   return false;
 };
 
-const compareBolleanAnswers = (userName, userAnswer, correctAnswer) => {
-  let answer = '';
+const compareBolleanAnswers = (userAnswer, correctAnswer) => {
   if (((userAnswer === 'yes') && (correctAnswer === true)) || ((userAnswer === 'no') && (correctAnswer === false))) {
-    console.log('Correct!');
     return true;
   }
-  if (userAnswer === 'yes' && correctAnswer === false) {
-    answer = 'no';
-  } else answer = 'yes';
-
-  console.log(`"${userAnswer}" is wrong answer ;(. Correct answer was "${answer}". Lets try again, ${userName}!`);
   return false;
 };
 
 // Функция сравнения правильного ответа и ответа, полученного от пользователя
-const compareAnswers = (userName, userAnswer, correctAnswer) => {
+const compareAnswers = (userAnswer, correctAnswer) => {
   if (typeof (correctAnswer) === 'boolean') {
-    return compareBolleanAnswers(userName, userAnswer, correctAnswer);
+    return compareBolleanAnswers(userAnswer, correctAnswer);
   }
-  return compareStringAndNumberAnswers(userName, userAnswer, correctAnswer);
+  return compareStringAndNumberAnswers(userAnswer, correctAnswer);
 };
 
 // Подготовка данных для движка
@@ -66,9 +72,8 @@ export const generateGameData = (startRange, endRange, numbersCount = 1) => {
   return gameData;
 };
 
-// Форматирование данных для вывода в консоль
+// Форматирование входных данных для вывода в консоль
 const formatDataset = (dataset) => dataset.join(delimiter);
-
 
 /** ***************
 Движок для всех игр: приветствие, интерактивное взаимодействие с пользователем,
@@ -87,9 +92,14 @@ export const launchGameEngine = (gameRules, generateDataset, getCorrectAnswer) =
     const correctAnswer = getCorrectAnswer(dataset);
     console.log('Question: ', questionText);
     const userAnswer = readlineSync.question('Your answer: ');
-    if (compareAnswers(userName, userAnswer, correctAnswer)) {
+    if (compareAnswers(userAnswer, correctAnswer)) {
+      console.log('Correct!');
       counter += 1;
-    } else counter = 0;
+    } else {
+      const printableCorrectAnswer = printCorrectAnswer(userAnswer, correctAnswer);
+      console.log(`"${userAnswer}" is wrong answer ;(. Correct answer was "${printableCorrectAnswer}". Lets try again, ${userName}!`);
+      counter = 0;
+    }
   }
   printCongrats(userName);
 };

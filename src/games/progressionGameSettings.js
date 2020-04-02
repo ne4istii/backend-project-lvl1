@@ -36,10 +36,11 @@ const getHideProgressionElement = (prog) => {
   for (let i = 0; i < progLen; i += 1) {
     if (prog[i] === replaceSymbol && i === 0) {
       hideElement = 2 * prog[i + 1] - prog[i + 2];
-    }
-    if (prog[i] === replaceSymbol && i === (progLen - 1)) {
+    } else if (prog[i] === replaceSymbol && i === (progLen - 1)) {
       hideElement = 2 * prog[i - 1] - prog[i - 2];
-    } else hideElement = (prog[i - 1] + prog[i + 1]) / 2;
+    } else if (prog[i] === replaceSymbol) {
+      hideElement = (prog[i - 1] + prog[i + 1]) / 2;
+    }
   }
   return hideElement;
 };
