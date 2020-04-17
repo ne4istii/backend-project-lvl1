@@ -43,18 +43,18 @@ const getHideProgressionElement = (prog) => {
   const hideElement = [];
   let diff = 0;
   for (let i = 0; i < correctAnswerСounter; i += 1) {
-    for (let j = 0; j < progLen; j += 1) {
-      if (prog[i][j] === replaceSymbol && j < 2) {
-        diff = prog[i][j + 2] - prog[i][j + 1];
-        hideElement[i] = `${prog[i][j + 1] - diff}`;
-      }
-      if (prog[i][j] === replaceSymbol) {
-        const [startElement] = prog[i];
-        diff = prog[i][j - 1] - prog[i][j - 2];
-        hideElement[i] = `${startElement + diff * j}`;
-      }
+    const index = prog[i].indexOf(replaceSymbol);
+    console.log(index);
+    if (prog[i].includes(replaceSymbol) && index > 2) {
+      const [startElement] = prog[i];
+      diff = prog[i][index - 1] - prog[i][index - 2];
+      hideElement[i] = `${startElement + diff * index}`;
+    } else if (prog[i].includes(replaceSymbol)) {
+      diff = prog[i][index + 2] - prog[i][index + 1];
+      hideElement[i] = `${prog[i][index + 1] - diff}`;
     }
   }
+
   return hideElement;
 };
 
