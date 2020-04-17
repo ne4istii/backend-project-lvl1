@@ -1,91 +1,66 @@
 import readlineSync from 'readline-sync';
 
-// Константа - количество правильных ответов для победы в игре
-const correctAnswerСounter = 3;
+// Global variable
+export const correctAnswerСounter = 3;
+const correctAnswer = 'yes';
+const wrongAnswer = 'no';
+const welcomeMessage = 'Welcome to the BrainGames!\n\n';
+const delimeter = ' ';
 
-// Константа - разделитель для отображения данных в игре
-const delimiter = ' ';
+// Generator of random integer from start to end
+export const getRandomInteger = (start, end) => Math.floor(Math.random() * (end - start) + start);
 
-// Фукнция-генератор случайного целого числа в заданном диапазоне
-// eslint-disable-next-line max-len
-export const generateRandomInteger = (startRange, endRange) => Math.floor(Math.random() * (endRange - startRange) + startRange);
-
-/** ********** Вспомогательные функции, общие для всех игр ************** */
-
-// Получение имени пользователя из ввода
-const getUsername = () => {
-  const userName = readlineSync.question('May I have your name? ');
-  console.log('Hello, ', userName, '!\n');
-  return userName;
-};
-
-// Вывод на экран приветствия
-const printCongrats = (userName) => console.log('Congratulations, ', userName, '!');
-
-// Вывод на экран текста (правила игры)
-const printGameInfo = (text) => console.log(text);
-
-// Вывод на экран результирующих результатов
-const getCorrectAnswerForPrint = (userAnswer, correctAnswer) => {
-  let printableCorrectAnswer = '';
-  if ((userAnswer === 'yes') || (correctAnswer === false)) {
-    printableCorrectAnswer = 'no';
-  } else if ((userAnswer === 'no') || (correctAnswer === true)) {
-    printableCorrectAnswer = 'yes';
-  } else if (correctAnswer === 'number') {
-    printableCorrectAnswer = String(correctAnswer);
-  } else printableCorrectAnswer = correctAnswer;
-  return printableCorrectAnswer;
-};
-
-// Функция сравнения правильного ответа и ответа, полученного от пользователя
-const compareAnswers = (userAnswer, correctAnswer) => {
-  if (((userAnswer === 'yes') && (correctAnswer === true)) || ((userAnswer === 'no') && (correctAnswer === false))) {
-    return true;
+// generate Dataset for game
+export const generateDataset = (numbersCount, startRange, endRange) => {
+  const dataset = [];
+  for (let i = 0; i < correctAnswerСounter; i += 1) {
+    dataset[i] = [];
+    for (let j = 0; j < numbersCount; j += 1) {
+      const number = getRandomInteger(startRange, endRange);
+      dataset[i][j] = number;
+    }
   }
-  if (Number(userAnswer) === correctAnswer) {
-    return true;
-  }
-  return false;
+  return dataset;
 };
 
-// Подготовка данных для движка
-export const generateGameData = (startRange, endRange, numbersCount = 1) => {
-  const gameData = [];
-  for (let i = 0; i < numbersCount; i += 1) {
-    gameData[i] = generateRandomInteger(startRange, endRange);
+// format Dataset for question text to Dvizhok
+export const formatDataset = (dataset) => {
+  const questions = [];
+  for (let i = 0; i < correctAnswerСounter; i += 1) {
+    const question = dataset[i].join(delimeter);
+    questions.push(question);
   }
-  return gameData;
+  return questions;
 };
 
-// Форматирование входных данных для вывода в консоль
-const formatDataset = (dataset) => dataset.join(delimiter);
+// make Array of correctAnswers to Dvizhok
+export const generateCorrectAnswers = (dataset, checkdataset) => {
+  const answers = [];
+  for (let i = 0; i < correctAnswerСounter; i += 1) {
+    const answer = (checkdataset(dataset[i])) ? correctAnswer : wrongAnswer;
+    answers.push(answer);
+  }
+  return answers;
+};
 
 /** ***************
 Движок для всех игр: приветствие, интерактивное взаимодействие с пользователем,
 проигрывание раундов, финальное поздравление
 **************** */
 
-
 // Игровой процесс
-export const launchGameEngine = (gameRules, generateDataset, getCorrectAnswer) => {
-  let counter = 0;
-  printGameInfo(gameRules);
-  const userName = getUsername();
-  while (counter < correctAnswerСounter) {
-    const dataset = generateDataset();
-    const questionText = formatDataset(dataset, delimiter);
-    const correctAnswer = getCorrectAnswer(dataset);
-    console.log('Question: ', questionText);
+export const launchGameEngine = (gameRules, questions, correctAnswers) => {
+  console.log(welcomeMessage, gameRules);
+  const userName = readlineSync.question('May I have your name? ');
+  console.log('Hello, ', userName, '!\n');
+  for (let i = 0; i < correctAnswerСounter; i += 1) {
+    console.log('Question: ', questions[i]);
     const userAnswer = readlineSync.question('Your answer: ');
-    if (compareAnswers(userAnswer, correctAnswer)) {
+    if (userAnswer === correctAnswers[i]) {
       console.log('Correct!');
-      counter += 1;
     } else {
-      const printableCorrectAnswer = getCorrectAnswerForPrint(userAnswer, correctAnswer);
-      console.log(`"${userAnswer}" is wrong answer ;(. Correct answer was "${printableCorrectAnswer}". Lets try again, ${userName}!`);
-      counter = 0;
+      console.log(`"${userAnswer}" is wrong answer ;(. Correct answer was "${correctAnswers[i]}". Lets try again, ${userName}!`);
     }
   }
-  printCongrats(userName);
+  return console.log('Congratulations, ', userName, '!');
 };

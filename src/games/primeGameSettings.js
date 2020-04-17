@@ -1,25 +1,26 @@
 import {
-  generateGameData, launchGameEngine,
+  launchGameEngine, generateDataset, formatDataset, generateCorrectAnswers,
 } from '../index.js';
 
 // Настройки параметров игры
-const index = 0;
+const numbersCount = 1;
 const startRange = 1;
 const endRange = 100;
-const gameRules = 'Welcome to the BrainGames!\n\n Answer "yes" if given number is prime. Otherwise answer "no".\n';
-
-const generateDataset = () => generateGameData(startRange, endRange);
+const gameRules = 'Answer "yes" if given number is prime. Otherwise answer "no".\n';
 
 // Функция проверки числа на простоту
-const isPrime = (numbers) => {
-  let denom = 2;
-  const number = numbers[index];
-  while (number % denom !== 0) denom += 1;
-  if (denom === number) return true;
-  return false;
+const isPrime = (number) => {
+  if (number <= 1) return false;
+  for (let i = 2; i * i <= number; i += 1) {
+    if (number % i === 0) return false;
+  }
+  return true;
 };
 
 // Передача параметров игровому процессу
-const prime = () => launchGameEngine(gameRules, generateDataset, isPrime);
+const numbers = generateDataset(numbersCount, startRange, endRange);
+const questions = formatDataset(numbers);
+const correctAnswers = generateCorrectAnswers(numbers, isPrime);
+const prime = () => launchGameEngine(gameRules, questions, correctAnswers);
 
 export default prime;

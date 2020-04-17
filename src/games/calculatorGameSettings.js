@@ -1,5 +1,5 @@
 import {
-  launchGameEngine, generateGameData,
+  launchGameEngine, generateDataset, correctAnswerСounter,
 } from '../index.js';
 
 // Настройки параметров игры
@@ -7,48 +7,53 @@ const numbersCount = 2;
 const startRange = 1;
 const endRange = 10;
 const mathOperator = '*-+';
-const gameRules = 'Welcome to the BrainGames!\n\n What is the result of the expression?\n';
+const gameRules = 'What is the result of the expression?\n';
 
 // Функция-генератор случайного символа в переданной последовательности
 const generateRandomSymbol = (sequence) => sequence[Math.floor(Math.random() * sequence.length)];
 
-// Формируем данные для выражения
-const expression = () => {
-  const gameData = generateGameData(startRange, endRange, numbersCount);
-  const expressionData = [];
-  for (let i = 0; i < gameData.length; i += 1) {
-    if (i < gameData.length - 1) {
-      expressionData.push(gameData[i]);
-      expressionData.push(generateRandomSymbol(mathOperator));
-    } else expressionData.push(gameData[i]);
+// format Dataset for question text to Dvizhok
+const formatExpression = (dataset) => {
+  const questions = [];
+  for (let i = 0; i < correctAnswerСounter; i += 1) {
+    const operator = generateRandomSymbol(mathOperator);
+    const exp = dataset[i].join(` ${operator} `);
+    questions.push(exp);
   }
-  return expressionData;
+  return questions;
 };
 
 // Функция вычисления выражения
-const evaluateExpression = (expressionData) => {
-  let calculationResult = 0;
-  for (let i = 0; i < expressionData.length; i += 1) {
-    switch (expressionData[i]) {
-      case '*':
-        calculationResult = expressionData[i - 1] * expressionData[i + 1];
+const evaluateExpression = (gameData, questions) => {
+  const calcResult = [];
+  for (let i = 0; i < gameData.length; i += 1) {
+    switch (true) {
+      case questions[i].includes('*'): {
+        const [firstOperand, secondOperand] = gameData[i];
+        calcResult.push(`${firstOperand * secondOperand}`);
         break;
-      case '+':
-        calculationResult = expressionData[i - 1] + expressionData[i + 1];
+      }
+      case questions[i].includes('+'): {
+        const [firstOperand, secondOperand] = gameData[i];
+        calcResult.push(`${firstOperand + secondOperand}`);
         break;
-      case '-':
-        calculationResult = expressionData[i - 1] - expressionData[i + 1];
+      }
+      case questions[i].includes('-'): {
+        const [firstOperand, secondOperand] = gameData[i];
+        calcResult.push(`${firstOperand - secondOperand}`);
         break;
+      }
       default:
         break;
     }
   }
-  return calculationResult;
+  return calcResult;
 };
 
 // Передача параметров игровому процессу
-
-const calculator = () => launchGameEngine(gameRules, expression, evaluateExpression);
-
+const gameData = generateDataset(numbersCount, startRange, endRange);
+const questions = formatExpression(gameData);
+const correctAnswers = evaluateExpression(gameData, questions);
+const calculator = () => launchGameEngine(gameRules, questions, correctAnswers);
 
 export default calculator;
