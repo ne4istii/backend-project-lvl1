@@ -27,19 +27,17 @@ const formatExpression = (dataset) => {
 const evaluateExpression = (gameData, questions) => {
   const calcResult = [];
   for (let i = 0; i < gameData.length; i += 1) {
+    const [firstOperand, secondOperand] = gameData[i];
     switch (true) {
       case questions[i].includes('*'): {
-        const [firstOperand, secondOperand] = gameData[i];
         calcResult.push(`${firstOperand * secondOperand}`);
         break;
       }
       case questions[i].includes('+'): {
-        const [firstOperand, secondOperand] = gameData[i];
         calcResult.push(`${firstOperand + secondOperand}`);
         break;
       }
       case questions[i].includes('-'): {
-        const [firstOperand, secondOperand] = gameData[i];
         calcResult.push(`${firstOperand - secondOperand}`);
         break;
       }

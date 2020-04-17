@@ -47,7 +47,8 @@ const getHideProgressionElement = (prog) => {
       if (prog[i][j] === replaceSymbol && j < 2) {
         diff = prog[i][j + 2] - prog[i][j + 1];
         hideElement[i] = `${prog[i][j + 1] - diff}`;
-      } else if (prog[i][j] === replaceSymbol) {
+      }
+      if (prog[i][j] === replaceSymbol) {
         const [startElement] = prog[i];
         diff = prog[i][j - 1] - prog[i][j - 2];
         hideElement[i] = `${startElement + diff * j}`;

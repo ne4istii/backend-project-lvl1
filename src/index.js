@@ -59,7 +59,7 @@ export const launchGameEngine = (gameRules, questions, correctAnswers) => {
     if (userAnswer === correctAnswers[i]) {
       console.log('Correct!');
     } else {
-      console.log(`"${userAnswer}" is wrong answer ;(. Correct answer was "${correctAnswers[i]}". Lets try again, ${userName}!`);
+      return console.log(`"${userAnswer}" is wrong answer ;(. Correct answer was "${correctAnswers[i]}". Lets try again, ${userName}!`);
     }
   }
   return console.log('Congratulations, ', userName, '!');
