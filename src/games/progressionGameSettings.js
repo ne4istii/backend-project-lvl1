@@ -23,17 +23,23 @@ const replaceProgressionElement = (progression) => {
   return progressionWithHideElement;
 };
 
+const genProg = (prog, start, diff, n) => {
+  if (n === 0) prog.push(start);
+  else if (n < progLen) {
+    prog.push(start + diff * n);
+  } else return prog;
+  return genProg(prog, start, diff, n + 1);
+};
+
 // Generate progression
 const generateProgression = () => {
   const progression = [];
   for (let i = 0; i < correctAnswerСounter; i += 1) {
-    progression[i] = [];
-    const progStep = getRandomInteger(startRange, endRange);
-    let progElement = getRandomInteger(startRange, endRange);
-    for (let j = 0; j < progLen; j += 1) {
-      progression[i][j] = progElement;
-      progElement += progStep;
-    }
+    const n = 0;
+    const prog = [];
+    const progDiff = getRandomInteger(startRange, endRange);
+    const firstElement = getRandomInteger(startRange, endRange);
+    progression[i] = genProg(prog, firstElement, progDiff, n);
   }
   return replaceProgressionElement(progression);
 };
@@ -44,7 +50,6 @@ const getHideProgressionElement = (prog) => {
   let diff = 0;
   for (let i = 0; i < correctAnswerСounter; i += 1) {
     const index = prog[i].indexOf(replaceSymbol);
-    console.log(index);
     if (prog[i].includes(replaceSymbol) && index > 2) {
       const [startElement] = prog[i];
       diff = prog[i][index - 1] - prog[i][index - 2];
