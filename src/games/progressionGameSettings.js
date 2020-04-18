@@ -13,33 +13,30 @@ const gameRules = 'What number is missing in the progression?\n';
 const replaceProgressionElement = (progression) => {
   const progressionWithHideElement = [];
   for (let i = 0; i < correctAnswerСounter; i += 1) {
-    progressionWithHideElement[i] = [];
-    const replacePositionNumber = getRandomInteger(startRange, progLen);
-    for (let j = 0; j < progLen; j += 1) {
-      if (replacePositionNumber === j) progressionWithHideElement[i][j] = replaceSymbol;
-      else progressionWithHideElement[i][j] = progression[i][j];
-    }
+    progressionWithHideElement[i] = [...progression[i]];
+    const replacePositionNumber = getRandomInteger(startRange - 1, progLen);
+    progressionWithHideElement[i][replacePositionNumber] = replaceSymbol;
   }
   return progressionWithHideElement;
 };
 
-const genProg = (prog, start, diff, n) => {
+const generateProgression = (prog, start, diff, n) => {
   if (n === 0) prog.push(start);
   else if (n < progLen) {
     prog.push(start + diff * n);
   } else return prog;
-  return genProg(prog, start, diff, n + 1);
+  return generateProgression(prog, start, diff, n + 1);
 };
 
 // Generate progression
-const generateProgression = () => {
+const progressionData = () => {
   const progression = [];
   for (let i = 0; i < correctAnswerСounter; i += 1) {
     const n = 0;
     const prog = [];
     const progDiff = getRandomInteger(startRange, endRange);
     const firstElement = getRandomInteger(startRange, endRange);
-    progression[i] = genProg(prog, firstElement, progDiff, n);
+    progression[i] = generateProgression(prog, firstElement, progDiff, n);
   }
   return replaceProgressionElement(progression);
 };
@@ -64,7 +61,7 @@ const getHideProgressionElement = (prog) => {
 };
 
 // Передача параметров игровому процессу
-const gameData = generateProgression();
+const gameData = progressionData();
 const questions = formatDataset(gameData);
 const correctAnswers = getHideProgressionElement(gameData);
 const progression = () => launchGameEngine(gameRules, questions, correctAnswers);
