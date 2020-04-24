@@ -10,35 +10,41 @@ const progLen = 10;
 const gameRules = 'What number is missing in the progression?\n';
 
 // Hide progression element
+/*
 const replaceProgressionElement = (progression) => {
-  const progressionWithHideElement = [];
-  for (let i = 0; i < correctAnswerСounter; i += 1) {
-    progressionWithHideElement[i] = [...progression[i]];
-    const replacePositionNumber = getRandomInteger(startRange - 1, progLen);
-    progressionWithHideElement[i][replacePositionNumber] = replaceSymbol;
-  }
+  const progressionWithHideElement = [...progression];
+  const replacePositionNumber = getRandomInteger(startRange - 1, progLen);
+  progressionWithHideElement[replacePositionNumber] = replaceSymbol;
   return progressionWithHideElement;
 };
-
-const generateProgression = (prog, start, diff, n) => {
-  if (n === 0) prog.push(start);
-  else if (n < progLen) {
-    prog.push(start + diff * n);
-  } else return prog;
-  return generateProgression(prog, start, diff, n + 1);
-};
+*/
 
 // Generate progression
+const generateProgression = (start, replaceNum, diff) => {
+  if (n === 0 && n === replaceNum) {
+    prog.push(replaceSymbol);
+  } else if (n === 0) prog.push(start);
+  else if (n < progLen && n === replaceNum) {
+    prog.push(replaceSymbol);
+  } else if (n < progLen) prog.push(start + diff * n);
+  if (n >= progLen) return prog;
+  return generateProgression(prog, start, replaceNum, diff, n + 1);
+};
+
+// Format progression
 const progressionData = () => {
-  const progression = [];
+  const progWithHideElement = [];
   for (let i = 0; i < correctAnswerСounter; i += 1) {
-    const n = 0;
-    const prog = [];
+    // const n = 0;
+    // const prog = [];
     const progDiff = getRandomInteger(startRange, endRange);
     const firstElement = getRandomInteger(startRange, endRange);
-    progression[i] = generateProgression(prog, firstElement, progDiff, n);
+    const replaceElement = getRandomInteger(startRange - 1, progLen);
+    progWithHideElement[i] = generateProgression(firstElement, replaceElement, progDiff);
+    // const progression = generateProgression(prog, firstElement, replaceElement, progDiff, n);
+    // progWithHideElement[i] = replaceProgressionElement(progression);
   }
-  return replaceProgressionElement(progression);
+  return progWithHideElement;
 };
 
 // Calculate progression element
