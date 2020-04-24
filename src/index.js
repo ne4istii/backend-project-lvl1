@@ -16,8 +16,7 @@ export const generateDataset = (numbersCount, startRange, endRange) => {
   for (let i = 0; i < correctAnswerСounter; i += 1) {
     dataset[i] = [];
     for (let j = 0; j < numbersCount; j += 1) {
-      const number = getRandomInteger(startRange, endRange);
-      dataset[i][j] = number;
+      dataset[i].push(getRandomInteger(startRange, endRange));
     }
   }
   return dataset;
@@ -27,13 +26,12 @@ export const generateDataset = (numbersCount, startRange, endRange) => {
 export const formatDataset = (dataset) => {
   const questions = [];
   for (let i = 0; i < correctAnswerСounter; i += 1) {
-    const question = dataset[i].join(delimeter);
-    questions.push(question);
+    questions.push(dataset[i].join(delimeter));
   }
   return questions;
 };
 
-// make Array of correctAnswers to Dvizhok
+// make Collection of correctAnswers to Dvizhok
 export const generateCorrectAnswers = (dataset, checkdataset) => {
   const answers = [];
   for (let i = 0; i < correctAnswerСounter; i += 1) {

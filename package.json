@@ -27,7 +27,6 @@
     "eslint-plugin-import": "^2.20.2"
   },
   "dependencies": {
-    "acorn": "^7.1.1",
     "readline-sync": "^1.4.10"
   }
 }
