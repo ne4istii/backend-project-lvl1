@@ -28,7 +28,6 @@ const progressionData = () => {
     const replacementNumber = getRandomInteger(startRange - 1, progLen);
     progWithHideElement[i] = generateProgression(firstElement, replacementNumber, progDiff);
   }
-  console.log(progWithHideElement);
   return progWithHideElement;
 };
 

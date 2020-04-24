@@ -8,20 +8,19 @@ const startRange = 1;
 const endRange = 100;
 const gameRules = 'Find the greatest common divisor of given numbers.\n';
 
-// Фунцикция вычисления НОД двух чисел
+// Calculate Gcd
 const gcd2Numbers = (firstNumber, secondNumber) => {
   if (secondNumber === 0) return Math.abs(firstNumber);
   return gcd2Numbers(secondNumber, firstNumber % secondNumber);
 };
 
-// Фунцикция вычисления НОД любого количества чисел
+// Format Gcd data
 const calculateGcd = (numbers) => {
   const result = [];
   for (let i = 0; i < correctAnswerСounter; i += 1) {
     const [firstNumber, secondNumber] = numbers[i];
     result.push(`${gcd2Numbers(firstNumber, secondNumber)}`);
   }
-  console.log(result);
   return result;
 };
 
