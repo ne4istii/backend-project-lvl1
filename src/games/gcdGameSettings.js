@@ -1,4 +1,4 @@
-import { launchGameEngine, correctAnswerСounter } from '../index.js';
+import correctAnswerСounter, { launchGameEngine } from '../index.js';
 
 import { generateDataset, formQuestions } from '../common.js';
 

@@ -1,7 +1,7 @@
 import readlineSync from 'readline-sync';
 
 // Global variable
-export const correctAnswerСounter = 3;
+const correctAnswerСounter = 3;
 const welcomeMessage = 'Welcome to the BrainGames!\n\n';
 
 // Game play
@@ -20,3 +20,5 @@ export const launchGameEngine = (gameRules, questions, correctAnswers) => {
   }
   return console.log('Congratulations, ', userName, '!');
 };
+
+export default correctAnswerСounter;

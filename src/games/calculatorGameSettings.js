@@ -1,6 +1,6 @@
-import {
-  launchGameEngine, generateDataset, correctAnswerСounter,
-} from '../index.js';
+import { launchGameEngine } from '../index.js';
+
+import { generateDataset } from '../common.js';
 
 // Настройки параметров игры
 const numbersCount = 2;
@@ -12,14 +12,10 @@ const gameRules = 'What is the result of the expression?\n';
 // Функция-генератор случайного символа в переданной последовательности
 const generateRandomSymbol = (sequence) => sequence[Math.floor(Math.random() * sequence.length)];
 
-// format Dataset for question text to Dvizhok
-const formatExpression = (dataset) => {
+// form Dataset for question text
+const formExpression = (dataset) => {
   const questions = [];
-  for (let i = 0; i < correctAnswerСounter; i += 1) {
-    const operator = generateRandomSymbol(mathOperator);
-    const expression = dataset[i].join(` ${operator} `);
-    questions.push(expression);
-  }
+  dataset.forEach((item) => questions.push(item.join(` ${generateRandomSymbol(mathOperator)} `)));
   return questions;
 };
 
@@ -50,7 +46,7 @@ const evaluateExpression = (gameData, questions) => {
 
 // Передача параметров игровому процессу
 const gameData = generateDataset(numbersCount, startRange, endRange);
-const questions = formatExpression(gameData);
+const questions = formExpression(gameData);
 const correctAnswers = evaluateExpression(gameData, questions);
 const calculator = () => launchGameEngine(gameRules, questions, correctAnswers);
 

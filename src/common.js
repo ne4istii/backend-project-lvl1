@@ -1,6 +1,4 @@
-import {
-  correctAnswerСounter,
-} from './index.js';
+import correctAnswerСounter from './index.js';
 
 // Global constants
 const correctAnswer = 'yes';
@@ -8,7 +6,7 @@ const wrongAnswer = 'no';
 const delimeter = ' ';
 
 // Generator of random integer from start to end
-export const getRandomInteger = (start, end) => Math.floor(Math.random() * (end - start) + start);
+const getRandomInteger = (start, end) => Math.floor(Math.random() * (end - start) + start);
 
 // Generate Dataset for game
 export const generateDataset = (numbersCount, startRange, endRange) => {
@@ -35,3 +33,5 @@ export const getCorrectAnswers = (dataset, checkDataset) => {
   dataset.forEach((item) => answers.push(checkDataset(item) ? correctAnswer : wrongAnswer));
   return answers;
 };
+
+export default getRandomInteger;

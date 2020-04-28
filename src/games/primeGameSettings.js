@@ -1,8 +1,6 @@
-import launchGameEngine from '../index.js';
+import { launchGameEngine } from '../index.js';
 
-import {
-  generateDataset, formQuestions, getCorrectAnswers,
-} from '../common.js';
+import { generateDataset, formQuestions, getCorrectAnswers } from '../common.js';
 
 // Настройки параметров игры
 const numbersCount = 1;

@@ -1,6 +1,5 @@
-import { launchGameEngine, correctAnswerСounter } from '../index.js';
-
-import { getRandomInteger, formQuestions } from '../common.js';
+import correctAnswerСounter, { launchGameEngine } from '../index.js';
+import getRandomInteger, { formQuestions } from '../common.js';
 
 // Настройки параметров игры
 const startRange = 1;
