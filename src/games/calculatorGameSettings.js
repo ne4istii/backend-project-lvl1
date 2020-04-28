@@ -17,8 +17,8 @@ const formatExpression = (dataset) => {
   const questions = [];
   for (let i = 0; i < correctAnswerСounter; i += 1) {
     const operator = generateRandomSymbol(mathOperator);
-    const exp = dataset[i].join(` ${operator} `);
-    questions.push(exp);
+    const expression = dataset[i].join(` ${operator} `);
+    questions.push(expression);
   }
   return questions;
 };

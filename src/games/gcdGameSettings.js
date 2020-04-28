@@ -1,6 +1,6 @@
-import {
-  launchGameEngine, generateDataset, formatDataset, correctAnswerСounter,
-} from '../index.js';
+import { launchGameEngine, correctAnswerСounter } from '../index.js';
+
+import { generateDataset, formQuestions } from '../common.js';
 
 // Настройки параметров игры
 const numbersCount = 2; // Количество генерируемых чисел
@@ -26,7 +26,7 @@ const calculateGcd = (numbers) => {
 
 // Передача параметров игровому процессу
 const numbers = generateDataset(numbersCount, startRange, endRange);
-const questions = formatDataset(numbers);
+const questions = formQuestions(numbers);
 const correctAnswers = calculateGcd(numbers);
 const gcd = () => launchGameEngine(gameRules, questions, correctAnswers);
 

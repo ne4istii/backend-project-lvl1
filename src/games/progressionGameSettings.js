@@ -1,6 +1,6 @@
-import {
-  launchGameEngine, getRandomInteger, correctAnswerСounter, formatDataset,
-} from '../index.js';
+import { launchGameEngine, correctAnswerСounter } from '../index.js';
+
+import { getRandomInteger, formQuestions } from '../common.js';
 
 // Настройки параметров игры
 const startRange = 1;
@@ -51,7 +51,7 @@ const getHideProgressionElement = (prog) => {
 
 // Передача параметров игровому процессу
 const gameData = progressionData();
-const questions = formatDataset(gameData);
+const questions = formQuestions(gameData);
 const correctAnswers = getHideProgressionElement(gameData);
 const progression = () => launchGameEngine(gameRules, questions, correctAnswers);
 

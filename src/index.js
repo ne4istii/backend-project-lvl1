@@ -2,51 +2,9 @@ import readlineSync from 'readline-sync';
 
 // Global variable
 export const correctAnswerСounter = 3;
-const correctAnswer = 'yes';
-const wrongAnswer = 'no';
 const welcomeMessage = 'Welcome to the BrainGames!\n\n';
-const delimeter = ' ';
 
-// Generator of random integer from start to end
-export const getRandomInteger = (start, end) => Math.floor(Math.random() * (end - start) + start);
-
-// generate Dataset for game
-export const generateDataset = (numbersCount, startRange, endRange) => {
-  const dataset = [];
-  for (let i = 0; i < correctAnswerСounter; i += 1) {
-    dataset[i] = [];
-    for (let j = 0; j < numbersCount; j += 1) {
-      dataset[i].push(getRandomInteger(startRange, endRange));
-    }
-  }
-  return dataset;
-};
-
-// format Dataset for question text to Dvizhok
-export const formatDataset = (dataset) => {
-  const questions = [];
-  for (let i = 0; i < correctAnswerСounter; i += 1) {
-    questions.push(dataset[i].join(delimeter));
-  }
-  return questions;
-};
-
-// make Collection of correctAnswers to Dvizhok
-export const generateCorrectAnswers = (dataset, checkdataset) => {
-  const answers = [];
-  for (let i = 0; i < correctAnswerСounter; i += 1) {
-    const answer = (checkdataset(dataset[i])) ? correctAnswer : wrongAnswer;
-    answers.push(answer);
-  }
-  return answers;
-};
-
-/** ***************
-Движок для всех игр: приветствие, интерактивное взаимодействие с пользователем,
-проигрывание раундов, финальное поздравление
-**************** */
-
-// Игровой процесс
+// Game play
 export const launchGameEngine = (gameRules, questions, correctAnswers) => {
   console.log(welcomeMessage, gameRules);
   const userName = readlineSync.question('May I have your name? ');

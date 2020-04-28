@@ -1,6 +1,8 @@
+import launchGameEngine from '../index.js';
+
 import {
-  launchGameEngine, generateDataset, formatDataset, generateCorrectAnswers,
-} from '../index.js';
+  generateDataset, formQuestions, getCorrectAnswers,
+} from '../common.js';
 
 // Настройки параметров игры
 const numbersCount = 1;
@@ -19,8 +21,8 @@ const isPrime = (number) => {
 
 // Передача параметров игровому процессу
 const numbers = generateDataset(numbersCount, startRange, endRange);
-const questions = formatDataset(numbers);
-const correctAnswers = generateCorrectAnswers(numbers, isPrime);
+const questions = formQuestions(numbers);
+const correctAnswers = getCorrectAnswers(numbers, isPrime);
 const prime = () => launchGameEngine(gameRules, questions, correctAnswers);
 
 export default prime;
