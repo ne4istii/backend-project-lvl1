@@ -1,8 +1,10 @@
 import correctAnswerСounter, { launchGameEngine } from '../index.js';
 
-import getRandomInteger, { correctAnswer, wrongAnswer } from '../common.js';
+import getRandomInteger from '../common.js';
 
 // Настройки параметров игры
+const correctAnswer = 'yes';
+const wrongAnswer = 'no';
 const startRange = 1;
 const endRange = 100;
 const gameRules = 'Answer "yes" if given number is prime. Otherwise answer "no".\n';

@@ -1,8 +1,10 @@
 import correctAnswerСounter, { launchGameEngine } from '../index.js';
 
-import getRandomInteger, { correctAnswer, wrongAnswer } from '../common.js';
+import getRandomInteger from '../common.js';
 
 // Настройки параметров игры
+const correctAnswer = 'yes';
+const wrongAnswer = 'no';
 const startRange = 1;
 const endRange = 100;
 const gameRules = 'Answer "yes" if the number is even, otherwise answer "no".\n';
@@ -18,7 +20,6 @@ const generateDataset = () => {
     dataset[i].push(getRandomInteger(startRange, endRange));
     dataset[i].push(isParity(dataset[i]) ? correctAnswer : wrongAnswer);
   }
-  console.log(dataset);
   return dataset;
 };
 

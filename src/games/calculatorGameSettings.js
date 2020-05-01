@@ -44,7 +44,6 @@ const generateDataset = () => {
     dataset[i].push(`${firstNumber} ${operator} ${secondNumber}`);
     dataset[i].push(`${evaluateExpression(firstNumber, operator, secondNumber)}`);
   }
-  console.log(dataset);
   return dataset;
 };
 
