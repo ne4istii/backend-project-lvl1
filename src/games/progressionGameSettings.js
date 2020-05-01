@@ -1,10 +1,11 @@
 import correctAnswerСounter, { launchGameEngine } from '../index.js';
-import getRandomInteger, { formQuestions } from '../common.js';
+import getRandomInteger from '../common.js';
 
 // Настройки параметров игры
 const startRange = 1;
 const endRange = 10;
 const replacementSymbol = '..';
+const delimeter = ' ';
 const progLen = 10;
 const gameRules = 'What number is missing in the progression?\n';
 
@@ -15,43 +16,26 @@ const generateProgression = (firstElement, replacementNumber, progDiff) => {
     if (replacementNumber === i) progression[i] = replacementSymbol;
     else progression[i] = firstElement + progDiff * i;
   }
-  return progression;
+  return progression.join(delimeter);
 };
 
-// Format progression
-const progressionData = () => {
-  const progWithHideElement = [];
+// Form game data
+const generateDataset = () => {
+  const dataset = [];
   for (let i = 0; i < correctAnswerСounter; i += 1) {
+    dataset[i] = [];
     const progDiff = getRandomInteger(startRange, endRange);
     const firstElement = getRandomInteger(startRange, endRange);
     const replacementNumber = getRandomInteger(startRange - 1, progLen);
-    progWithHideElement[i] = generateProgression(firstElement, replacementNumber, progDiff);
+    const hideElementValue = `${firstElement + progDiff * replacementNumber}`;
+    dataset[i].push(generateProgression(firstElement, replacementNumber, progDiff));
+    dataset[i].push(hideElementValue);
   }
-  return progWithHideElement;
-};
-
-// Calculate progression element
-const getHideProgressionElement = (prog) => {
-  const hideElement = [];
-  let diff = 0;
-  for (let i = 0; i < correctAnswerСounter; i += 1) {
-    const index = prog[i].indexOf(replacementSymbol);
-    if (prog[i].includes(replacementSymbol) && index > 2) {
-      const [startElement] = prog[i];
-      diff = prog[i][index - 1] - prog[i][index - 2];
-      hideElement[i] = `${startElement + diff * index}`;
-    } else if (prog[i].includes(replacementSymbol)) {
-      diff = prog[i][index + 2] - prog[i][index + 1];
-      hideElement[i] = `${prog[i][index + 1] - diff}`;
-    }
-  }
-  return hideElement;
+  return dataset;
 };
 
 // Передача параметров игровому процессу
-const gameData = progressionData();
-const questions = formQuestions(gameData);
-const correctAnswers = getHideProgressionElement(gameData);
-const progression = () => launchGameEngine(gameRules, questions, correctAnswers);
+const dataset = generateDataset();
+const progression = () => launchGameEngine(gameRules, dataset);
 
 export default progression;
