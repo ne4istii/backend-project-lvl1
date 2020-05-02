@@ -2,7 +2,7 @@ import correctAnswerСounter, { launchGameEngine } from '../index.js';
 
 import getRandomInteger from '../common.js';
 
-// Настройки параметров игры
+// Global variables
 const startRange = 1;
 const endRange = 100;
 const gameRules = 'Find the greatest common divisor of given numbers.\n';
@@ -13,7 +13,7 @@ const calculateGcd = (firstNumber, secondNumber) => {
   return calculateGcd(secondNumber, firstNumber % secondNumber);
 };
 
-// Generate Dataset for game
+// Generate dataset for the game
 const generateDataset = () => {
   const dataset = [];
   for (let i = 0; i < correctAnswerСounter; i += 1) {
@@ -26,7 +26,7 @@ const generateDataset = () => {
   return dataset;
 };
 
-// Передача параметров игровому процессу
+// Pass parameters to the game process
 const dataset = generateDataset();
 const gcd = () => launchGameEngine(gameRules, dataset);
 

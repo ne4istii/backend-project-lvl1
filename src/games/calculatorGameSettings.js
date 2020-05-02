@@ -2,16 +2,16 @@ import correctAnswerСounter, { launchGameEngine } from '../index.js';
 
 import getRandomInteger from '../common.js';
 
-// Настройки параметров игры
+// Global variables
 const startRange = 1;
 const endRange = 10;
 const mathOperator = '*-+';
 const gameRules = 'What is the result of the expression?\n';
 
-// Функция-генератор случайного символа в переданной последовательности
+// Generate a random character from the passed sequence
 const generateRandomSymbol = (sequence) => sequence[Math.floor(Math.random() * sequence.length)];
 
-// Evaluate expression function
+// Evaluate expression
 const evaluateExpression = (firstOperand, operator, secondOperand) => {
   let calcResult = 0;
   switch (operator) {
@@ -33,7 +33,7 @@ const evaluateExpression = (firstOperand, operator, secondOperand) => {
   return calcResult;
 };
 
-// Generate Dataset for game
+// Generate dataset for the game
 const generateDataset = () => {
   const dataset = [];
   for (let i = 0; i < correctAnswerСounter; i += 1) {
@@ -47,7 +47,7 @@ const generateDataset = () => {
   return dataset;
 };
 
-// Передача параметров игровому процессу
+// Pass parameters to the game process
 const dataset = generateDataset();
 const calculator = () => launchGameEngine(gameRules, dataset);
 

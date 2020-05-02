@@ -1,6 +1,6 @@
 import readlineSync from 'readline-sync';
 
-// Global variable
+// Global variables
 const correctAnswerСounter = 3;
 const welcomeMessage = 'Welcome to the BrainGames!\n\n';
 
